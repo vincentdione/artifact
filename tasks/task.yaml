@@ -10,9 +10,10 @@ inputs:
 outputs:
 - name: image
 params:
-  CONTEXT: git-sources/Dockerfile
+  CONTEXT: git-sources
   BUILD_ARG_QUARKUS_PROFILE: ""
   BUILD_ARG_APP_NAME: ""
+  Dockerfile: git-sources/Dockerfile
 run:
   path: build
  
