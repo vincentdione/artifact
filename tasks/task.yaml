@@ -16,5 +16,11 @@ params:
   Dockerfile: git-sources/Dockerfile
 run:
   path: build
- 
-
+  args:
+    - --build-arg
+    - QUARKUS_PROFILE=${BUILD_ARG_QUARKUS_PROFILE}
+    - --build-arg
+    - APP_NAME=${BUILD_ARG_APP_NAME}
+    - -t
+    - $(cat /tmp/build/put/image/digest)
+    - ${CONTEXT}
