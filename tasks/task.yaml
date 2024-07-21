@@ -13,7 +13,7 @@ params:
   CONTEXT: git-sources
   BUILD_ARG_QUARKUS_PROFILE: ""
   BUILD_ARG_APP_NAME: ""
-  Dockerfile: git-sources/src/main/docker/Dockerfile.jvm
+  Dockerfile: git-sources/Dockerfile
 run:
   path: build
   args:

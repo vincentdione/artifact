@@ -1,26 +1,35 @@
 # task-build-image.yml
 ---
 platform: linux
+
 image_resource:
   type: registry-image
   source:
     repository: concourse/oci-build-task
+    tag: latest
+
 inputs:
-- name: git-sources
+  - name: git-sources
+  - name: version-backend
+
 outputs:
-- name: image
+  - name: image
+
 params:
   CONTEXT: git-sources
-  BUILD_ARG_QUARKUS_PROFILE: ""
-  BUILD_ARG_APP_NAME: ""
-  Dockerfile: git-sources/src/main/docker/Dockerfile.jvm
+  DOCKERFILE: git-sources/src/main/docker/Dockerfile.jvm
+  IMAGE_NAME: my-quarkus-app
+  IMAGE_TAG: latest
+  REGISTRY: ((composants.docker_repo))
+  USERNAME: ((composants.docker_username))
+  PASSWORD: ((composants.docker_token))
+
 run:
-  path: build
+  path: /bin/sh
   args:
-    - --build-arg
-    - QUARKUS_PROFILE=${BUILD_ARG_QUARKUS_PROFILE}
-    - --build-arg
-    - APP_NAME=${BUILD_ARG_APP_NAME}
-    - -t
-    - $(cat /tmp/build/put/image/digest)
-    - ${CONTEXT}
+    - -c
+    - |
+      # Build the Docker image
+      docker build -f ${DOCKERFILE} -t ${IMAGE_NAME}:${IMAGE_TAG} ${CONTEXT}
+
+      
