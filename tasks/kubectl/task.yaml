@@ -1,0 +1,21 @@
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: bitnami/kubectl
+
+params:
+  KUBECONFIG: /root/.kube/config
+
+inputs:
+  - name: git-ci
+
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      cd git-ci/k8s
+      kubectl apply -f postgres.yaml
+      kubectl apply -f deployment.yaml

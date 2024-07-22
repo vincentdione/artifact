@@ -1,0 +1,25 @@
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: alpine/helm
+    tag: 3.5.4
+
+inputs:
+  - name: git-ci
+
+params:
+  KUBE_CONTEXT: ""
+  ENVIRONMENT: ""
+  HELM_VALUES_FILE: ""
+
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      helm upgrade --install my-quarkus-app git-ci/my-quarkus-app \
+        --namespace {{ .params.ENVIRONMENT }} \
+        --values git-ci/my-quarkus-app/values-{{ .params.ENVIRONMENT }}.yaml \
+        --kube-context {{ .params.KUBE_CONTEXT }}
