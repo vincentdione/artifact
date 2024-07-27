@@ -4,15 +4,14 @@ image_resource:
   type: registry-image
   source: {repository: sonarsource/sonar-scanner-cli}
 inputs:
-  - name: git-ci
+  - name: git-sources
 params:
-
 run:
   path: sh
   args:
      - -exc
      - |
-       cd git-ci
+       cd git-sources
        sonar-scanner \
           -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
           -Dsonar.sources=${SONAR_SOURCES} \
