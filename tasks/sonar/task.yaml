@@ -1,22 +1,20 @@
-
 platform: linux
 image_resource:
   type: registry-image
-  source: {repository: sonarsource/sonar-scanner-cli}
+  source:
+    repository: sonarsource/sonar-scanner-cli
 inputs:
-  - name: git-sources
-params:
+  - name: git-ci
 run:
   path: sh
   args:
-     - -exc
-     - |
-       cd git-sources
-       ls -la # Liste le contenu du répertoire pour vérifier sa structure
-       echo "Starting SonarQube Scanner"
-       sonar-scanner --version
-       sonar-scanner \
-          -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-          -Dsonar.sources=${SONAR_SOURCES} \
-          -Dsonar.host.url=${SONAR_HOST_URL} \
-          -Dsonar.login=${SONAR_LOGIN}
+    - -exc
+    - |
+      cd git-ci
+      ls -la # Liste le contenu pour vérifier
+      echo "Starting SonarQube Scanner"
+      sonar-scanner \
+        -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+        -Dsonar.sources=${SONAR_SOURCES} \
+        -Dsonar.host.url=${SONAR_HOST_URL} \
+        -Dsonar.login=${SONAR_LOGIN}
