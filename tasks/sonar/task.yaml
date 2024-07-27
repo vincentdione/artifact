@@ -12,6 +12,9 @@ run:
      - -exc
      - |
        cd git-sources
+       ls -la # Liste le contenu du répertoire pour vérifier sa structure
+       echo "Starting SonarQube Scanner"
+       sonar-scanner --version
        sonar-scanner \
           -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
           -Dsonar.sources=${SONAR_SOURCES} \
