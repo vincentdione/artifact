@@ -11,10 +11,15 @@ run:
     - -exc
     - |
       cd git-ci
-      ls -la # Liste le contenu pour vérifier
+      # Vérifier les variables d'environnement
+      echo "SONAR_PROJECT_KEY=${SONAR_PROJECT_KEY}"
+      echo "SONAR_SOURCES=${SONAR_SOURCES}"
+      echo "SONAR_LOGIN=${SONAR_LOGIN}"
+      
+      # Copier le fichier template et remplacer les variables d'environnement
+      envsubst < sonar-project.properties > sonar-project.properties.tmp
+      mv sonar-project.properties.tmp sonar-project.properties
+      
+      # Exécuter le scanner
       echo "Starting SonarQube Scanner"
-      sonar-scanner \
-        -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-        -Dsonar.sources=${SONAR_SOURCES} \
-        -Dsonar.login=${SONAR_LOGIN} \
-        -Dsonar.java.binaries=target/classes
+      sonar-scanner 
