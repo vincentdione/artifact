@@ -15,8 +15,9 @@ run:
       echo "SONAR_PROJECT_KEY=${SONAR_PROJECT_KEY}"
       echo "SONAR_SOURCES=${SONAR_SOURCES}"
       echo "SONAR_LOGIN=${SONAR_LOGIN}"
+      
       # Copier le fichier template et remplacer les variables d'environnement
-      envsubst < sonar.properties.template > sonar.properties
+      #envsubst < sonar.properties.tmp > sonar.properties
       
       # Exécuter le scanner
       echo "Starting SonarQube Scanner"
