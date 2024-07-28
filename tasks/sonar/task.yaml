@@ -17,7 +17,7 @@ run:
       echo "SONAR_LOGIN=${SONAR_LOGIN}"
       
       # Copier le fichier template et remplacer les variables d'environnement
-      envsubst < sonar-scanner.properties > sonar-scanner.properties
+      #envsubst < sonar-scanner.properties > sonar-scanner.properties
       
       # Exécuter le scanner
       echo "Starting SonarQube Scanner"
