@@ -15,8 +15,7 @@ run:
       echo "SONAR_PROJECT_KEY=${SONAR_PROJECT_KEY}"
       echo "SONAR_SOURCES=${SONAR_SOURCES}"
       echo "SONAR_LOGIN=${SONAR_LOGIN}"
-      ls -l 
-      
+      chmod +w sonar.properties      
       # Copier le fichier template et remplacer les variables d'environnement
       envsubst < sonar.properties > sonar.properties.tmp
       mv sonar.properties.tmp sonar.properties
