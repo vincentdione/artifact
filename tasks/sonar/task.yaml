@@ -21,4 +21,4 @@ run:
       
       # Exécuter le scanner
       echo "Starting SonarQube Scanner"
-      sonar-scanner 
+      sonar-scanner -X
